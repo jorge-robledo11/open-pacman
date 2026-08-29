@@ -50,13 +50,21 @@ function parseTile( ch ) {
 const MAZE = MAZE_STR.map( ( row ) => row.split( '' ).map( parseTile ) );
 
 const TUNNEL_ROW = 14;
+// Pen (jaula): celdas transitables filas 13-15, cols 11-16. Puerta en (13,12).
+const PEN = { top: 13, bottom: 15, left: 11, right: 16 };
+const PEN_DOOR = { x: 13, y: 12 };
 const PACMAN_START = { x: 13, y: 23 };
+// Orden fijo: blinky SIEMPRE en indice 0 (inky usa game.ghosts[0]).
 const GHOST_STARTS = [
-  { x: 13, y: 14, kind: 'hunter' }, // dentro de la pen
-  { x: 14, y: 14, kind: 'random' }, // dentro de la pen
+  { x: 13, y: 14, kind: 'blinky' }, // dentro de la pen
+  { x: 12, y: 14, kind: 'pinky' },  // dentro de la pen
+  { x: 14, y: 14, kind: 'inky' },   // dentro de la pen
+  { x: 15, y: 14, kind: 'clyde' },  // dentro de la pen
 ];
 
 window.MAZE = MAZE;
 window.TUNNEL_ROW = TUNNEL_ROW;
+window.PEN = PEN;
+window.PEN_DOOR = PEN_DOOR;
 window.PACMAN_START = PACMAN_START;
 window.GHOST_STARTS = GHOST_STARTS;

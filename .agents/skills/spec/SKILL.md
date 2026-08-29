@@ -116,7 +116,7 @@ When the content is ready (either because you had everything, or because all sec
 4. Write the file directly at `specs/NN-slug.md` with all the sections. **Do not ask for permission to write it and do not ask whether the file name works** — announce the path in the final confirmation. Only ask if the target file already exists.
 5. Mark the state as `Draft` by default (or the equivalent word used by the existing specs in this repo). **Do not mark it as `Approved` automatically** — the user does that once they have re-read it.
 6. If the header lists dependencies (`**Depends on:** SPEC 01`), check that each referenced spec actually exists in `specs/`. If one does not, say so instead of writing a dangling reference.
-7. **Seed the config file if it does not exist.** Check for `specs/.spec-config.yml`. If it is **missing**, create it with the default content below. If it **already exists, leave it untouched** — never overwrite the user's settings.
+7. **Seed the config file if it does not exist.** Check for `specs/.spec-config.yaml`. If it is **missing**, create it with the default content below. If it **already exists, leave it untouched** — never overwrite the user's settings.
 
    ```yaml
    # spec workflow configuration
@@ -130,7 +130,7 @@ When the content is ready (either because you had everything, or because all sec
 8. Confirm to the user:
    - Path of the created file.
    - Reminder: the spec is in `Draft` state. Change it to `Approved` once you have re-read it.
-   - If you just created `specs/.spec-config.yml`, mention it exists and that `AutoCreateBranch` defaults to `true` (set it to `false` to control branch creation yourself).
+   - If you just created `specs/.spec-config.yaml`, mention it exists and that `AutoCreateBranch` defaults to `true` (set it to `false` to control branch creation yourself).
    - Next step: once reviewed and approved, run `/spec-impl NN-slug` to implement it.
    - **Stop here.** Do not propose implementing the spec, writing code, or taking any further action beyond this confirmation.
 
