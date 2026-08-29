@@ -12,7 +12,7 @@ Juego de Pac-Man en vanilla JS/HTML/CSS. Sin build, sin npm, sin tests, sin lint
 - Comunicación solo por globals (`window.*`). Añadir un archivo = añadir su
   `<script>` en index.html en la posición correcta.
 - Globals por archivo:
-  - `maze.js`: `MAZE`, `TUNNEL_ROW`, `PACMAN_START`, `GHOST_STARTS`
+  - `maze.js`: `MAZE`, `TUNNEL_ROW`, `PEN`, `PEN_DOOR`, `PACMAN_START`, `GHOST_STARTS`
   - `game.js`: `createGame()`, `update()`, `DIRS`
   - `render.js`: `draw(ctx, game, frame)`
   - `main.js`: cablea todo y corre el loop `requestAnimationFrame`.

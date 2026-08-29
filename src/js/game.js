@@ -112,6 +112,11 @@ function movePacman( game ) {
 
 // Celda objetivo de cada fantasma segun su kind.
 function targetOf( game, g ) {
+  // Dentro del pen: objetivo = puerta (el greedy no sube solo hacia el target).
+  if ( g.y >= PEN.top && g.y <= PEN.bottom && g.x >= PEN.left && g.x <= PEN.right ) {
+    return PEN_DOOR;
+  }
+
   const p = game.pacman;
   const px = Math.round( p.x );
   const py = Math.round( p.y );
