@@ -23,6 +23,14 @@ Juego de Pac-Man en vanilla JS/HTML/CSS. Sin build, sin npm, sin tests, sin lint
   `game.grid`, nunca `MAZE`.
 - Coordenadas `(x, y)` origen arriba-izquierda; `TILE=20` en render.js.
 
+## Validación en navegador
+- Usar el MCP de Playwright para validaciones visuales, interacción y consola.
+- No ejecutar `npx playwright install`, instalar navegadores, dependencias ni
+  paquetes del sistema.
+- Si el MCP no puede iniciar por configuración o falta de navegador, detenerse
+  e informar al usuario.
+- No sustituir automáticamente el MCP por otra instalación o herramienta.
+
 ## Convenciones
 - Comentarios y strings de UI en español.
 - Comillas simples, espacios dentro de paréntesis (`( e )`), indent 2 espacios.
