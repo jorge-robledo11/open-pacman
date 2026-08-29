@@ -1,4 +1,4 @@
-# AGENTS.md!
+# AGENTS.md
 
 Juego de Pac-Man en vanilla JS/HTML/CSS. Sin build, sin npm, sin tests, sin linter.
 
