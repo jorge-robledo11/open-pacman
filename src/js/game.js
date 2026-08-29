@@ -110,9 +110,30 @@ function movePacman( game ) {
   wrapTunnel( p, width );
 }
 
+// Celda objetivo de cada fantasma segun su kind.
+function targetOf( game, g ) {
+  const p = game.pacman;
+  const px = Math.round( p.x );
+  const py = Math.round( p.y );
+  const f = DIRS[ p.dir ];
+
+  if ( g.kind === 'blinky' ) return { x: px, y: py };
+  if ( g.kind === 'pinky' ) return { x: px + f.x * 4, y: py + f.y * 4 };
+  if ( g.kind === 'inky' ) {
+    const blinky = game.ghosts[ 0 ];
+    const ax = px + f.x * 2;
+    const ay = py + f.y * 2;
+    return { x: 2 * ax - Math.round( blinky.x ), y: 2 * ay - Math.round( blinky.y ) };
+  }
+  // clyde: persigue si esta lejos; si no, esquina inferior-izquierda.
+  const dist = Math.abs( g.x - px ) + Math.abs( g.y - py );
+  if ( dist > 8 ) return { x: px, y: py };
+  return { x: 0, y: game.grid.length - 1 };
+}
+
 function decideGhost( game, g ) {
   const grid = game.grid;
-  const p = game.pacman;
+  const target = targetOf( game, g );
 
   const options = Object.keys( DIRS ).filter(
     ( dir ) => dir !== OPPOSITE[ g.dir ] && canMove( grid, g.x, g.y, dir, 'ghost' )
@@ -120,25 +141,20 @@ function decideGhost( game, g ) {
   // Sin salida (callejon): permitir el giro de 180.
   const choices = options.length ? options : [ '' + OPPOSITE[ g.dir ] ];
 
-  if ( g.kind === 'hunter' ) {
-    const px = Math.round( p.x );
-    const py = Math.round( p.y );
-    let best = choices[ 0 ];
-    let bestDist = Infinity;
-    for ( const dir of choices ) {
-      const d = DIRS[ dir ];
-      const nx = g.x + d.x;
-      const ny = g.y + d.y;
-      const dist = Math.abs( nx - px ) + Math.abs( ny - py );
-      if ( dist < bestDist ) {
-        bestDist = dist;
-        best = dir;
-      }
+  // Elegir la direccion que mas acerque a la celda objetivo.
+  let best = choices[ 0 ];
+  let bestDist = Infinity;
+  for ( const dir of choices ) {
+    const d = DIRS[ dir ];
+    const nx = g.x + d.x;
+    const ny = g.y + d.y;
+    const dist = Math.abs( nx - target.x ) + Math.abs( ny - target.y );
+    if ( dist < bestDist ) {
+      bestDist = dist;
+      best = dir;
     }
-    g.dir = best;
-  } else {
-    g.dir = choices[ Math.floor( Math.random() * choices.length ) ];
   }
+  g.dir = best;
 }
 
 function moveGhost( game, g ) {
