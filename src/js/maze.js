@@ -56,10 +56,10 @@ const PEN_DOOR = { x: 13, y: 12 };
 const PACMAN_START = { x: 13, y: 23 };
 // Orden fijo: blinky SIEMPRE en indice 0 (inky usa game.ghosts[0]).
 const GHOST_STARTS = [
-  { x: 13, y: 14, kind: 'blinky' }, // dentro de la pen
-  { x: 12, y: 14, kind: 'pinky' },  // dentro de la pen
-  { x: 14, y: 14, kind: 'inky' },   // dentro de la pen
-  { x: 15, y: 14, kind: 'clyde' },  // dentro de la pen
+  { x: 13, y: 14, kind: 'blinky', releaseDots: 0 }, // dentro de la pen; sale al inicio
+  { x: 12, y: 14, kind: 'pinky', releaseDots: 0 },  // dentro de la pen; tras cruzar Blinky
+  { x: 14, y: 14, kind: 'inky', releaseDots: 30 },  // dentro de la pen
+  { x: 15, y: 14, kind: 'clyde', releaseDots: 60 }, // dentro de la pen
 ];
 
 window.MAZE = MAZE;
