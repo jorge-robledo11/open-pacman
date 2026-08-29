@@ -20,7 +20,7 @@ Specs available in this folder:
 !`ls specs/ 2>/dev/null || echo "The specs/ folder does not exist"`
 
 Branch-creation config:
-!`cat specs/.spec-config.yml 2>/dev/null || echo "AutoCreateBranch: true (default, no config file)"`
+!`cat specs/.spec-config.yaml 2>/dev/null || echo "AutoCreateBranch: true (default, no config file)"`
 
 ---
 
@@ -232,4 +232,4 @@ in your repo's language) and make the final commit before merging this branch.
               Does not create branch, does not touch code
 ```
 
-**Branch creation is controlled by the `AutoCreateBranch` flag** in `specs/.spec-config.yml`. It defaults to `true` (create the branch automatically, as shown above). Set it to `false` to make Phase 3 ask `[y/N]` before creating the branch.
+**Branch creation is controlled by the `AutoCreateBranch` flag** in `specs/.spec-config.yaml`. It defaults to `true` (create the branch automatically, as shown above). Set it to `false` to make Phase 3 ask `[y/N]` before creating the branch.
