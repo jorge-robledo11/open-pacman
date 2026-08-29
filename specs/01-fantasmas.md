@@ -1,6 +1,6 @@
 # SPEC 01 — Cuatro fantasmas clásicos
 
-> **Estado:** Aprobado
+> **Estado:** Implementado
 > **Depende de:** — (ninguna; extiende la base del juego existente)
 > **Fecha:** 2026-08-29
 > **Objetivo:** Añadir los cuatro fantasmas clásicos de Pac-Man, cada uno con una estrategia de persecución distinta.
