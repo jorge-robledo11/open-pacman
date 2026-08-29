@@ -7,7 +7,12 @@ const overlay = document.getElementById( 'overlay' );
 const actionBtn = document.getElementById( 'action-btn' );
 
 let game = createGame();
-let frame = 0;
+// Paso fijo a 60 Hz: update() avanza el juego, el render depende del monitor.
+const STEP = 1000 / 60;
+const MAX_STEPS = 5; // tope para no congelar en caidas de fps
+let last = performance.now();
+let acc = 0;
+let time = 0;
 
 const KEY_DIR = {
   ArrowLeft: 'left',
@@ -39,15 +44,24 @@ function startGame() {
 
 if ( actionBtn ) actionBtn.addEventListener( 'click', startGame );
 
-function loop() {
-  frame++;
-  if ( game.state === 'playing' ) {
-    update( game );
-    if ( game.state === 'won' ) showOverlay( 'GANASTE', 'win', 'Reiniciar' );
-    else if ( game.state === 'lost' ) showOverlay( 'PERDISTE', 'lose', 'Reiniciar' );
+function loop( now ) {
+  acc += now - last;
+  last = now;
+
+  let steps = 0;
+  while ( acc >= STEP && steps < MAX_STEPS ) {
+    if ( game.state === 'playing' ) {
+      update( game );
+      if ( game.state === 'won' ) showOverlay( 'GANASTE', 'win', 'Reiniciar' );
+      else if ( game.state === 'lost' ) showOverlay( 'PERDISTE', 'lose', 'Reiniciar' );
+    }
+    acc -= STEP;
+    time += STEP / 1000;
+    steps++;
   }
-  draw( ctx, game, frame );
+
+  draw( ctx, game, time );
   requestAnimationFrame( loop );
 }
 
-loop();
+requestAnimationFrame( loop );

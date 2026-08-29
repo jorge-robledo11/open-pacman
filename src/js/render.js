@@ -79,7 +79,7 @@ function drawDots( ctx, grid ) {
   }
 }
 
-function drawPacman( ctx, p, frame ) {
+function drawPacman( ctx, p, time ) {
   const { cx, cy } = cellCenter( p.x, p.y );
   let rot = 0;
   if ( p.dir === 'right' ) rot = 0;
@@ -87,8 +87,8 @@ function drawPacman( ctx, p, frame ) {
   else if ( p.dir === 'left' ) rot = Math.PI;
   else if ( p.dir === 'up' ) rot = -Math.PI / 2;
 
-  // Boca animada: abre/cierra con el frame.
-  const open = ( Math.sin( frame * 0.3 ) * 0.5 + 0.5 ) * 0.28 + 0.02;
+  // Boca animada: abre/cierra por tiempo (independiente del framerate).
+  const open = ( Math.sin( time * 18 ) * 0.5 + 0.5 ) * 0.28 + 0.02;
 
   ctx.fillStyle = '#ffff00';
   ctx.beginPath();
@@ -146,7 +146,7 @@ function drawHUD( ctx, game, W ) {
 
 const GHOST_COLORS = [ '#ff0000', '#ffb8ff', '#00ffff', '#ffb852' ];
 
-function draw( ctx, game, frame ) {
+function draw( ctx, game, time ) {
   const grid = game.grid;
   const W = grid[ 0 ].length;
   const H = grid.length;
@@ -157,7 +157,7 @@ function draw( ctx, game, frame ) {
   drawWalls( ctx, grid );
   drawDoor( ctx, grid );
   drawDots( ctx, grid );
-  drawPacman( ctx, game.pacman, frame );
+  drawPacman( ctx, game.pacman, time );
   game.ghosts.forEach( ( g, i ) => drawGhost( ctx, g, GHOST_COLORS[ i ] || '#ff0000' ) );
   drawHUD( ctx, game, W );
 }
